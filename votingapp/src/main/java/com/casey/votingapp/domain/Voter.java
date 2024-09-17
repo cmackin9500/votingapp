@@ -1,5 +1,6 @@
 package com.casey.votingapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,12 +11,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "contacts")
+@JsonInclude(NON_DEFAULT)
+@Table(name = "voters")
 public class Voter {
     @Id
     @UuidGenerator

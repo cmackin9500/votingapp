@@ -29,7 +29,11 @@ public class VoterService {
         return voterRepo.save(voter);
     }
 
-    public void deleteVoter(String id) {
-        voterRepo.deleteById(id);
+    public boolean deleteVoter(String id) {
+        if (voterRepo.existsById(id)) {
+            voterRepo.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
