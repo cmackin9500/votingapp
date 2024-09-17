@@ -1,0 +1,133 @@
+:root {
+  --padding-constant: 5%;
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  margin: 0;
+  padding-bottom: var(--padding-constant);
+  padding-left: var(--padding-constant);
+  text-align: left;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  justify-content: space-between;
+}
+
+.top-half {
+  flex: 1;
+  overflow: auto;
+}
+
+.bottom-half {
+  padding: 10px var(--padding-constant);
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-container {
+  width: calc(100% - var(--padding-constant) * 2);
+  margin: 0 auto;
+  padding: 0 var(--padding-constant); /* Equal padding on left and right */
+  box-sizing: border-box;
+}
+
+.table-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.table1,
+.table2 {
+  width: 48%; /* Adjust width to fit two tables side by side with some spacing */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.title-row {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  position: relative;
+}
+
+.plus-sign {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.plus-sign:hover {
+  color: grey;
+}
+
+.name-column {
+  width: 70%;
+}
+
+.voted-column,
+.votes-column {
+  width: 30%;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+select {
+  flex: 1;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
