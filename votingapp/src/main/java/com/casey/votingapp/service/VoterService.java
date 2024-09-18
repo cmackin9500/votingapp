@@ -20,6 +20,13 @@ public class VoterService {
         return voterRepo.findById(id).orElseThrow(() -> new RuntimeException("Voter not found"));
     }
 
+    public Voter updateVoter(String id, Voter updatedVoter) {
+        Voter existingVoter = getVoter(id);
+        existingVoter.setName(updatedVoter.getName());
+        existingVoter.setHasVoted(updatedVoter.getHasVoted());
+        return voterRepo.save(existingVoter);
+    }
+
     public List<Voter> getAllVoters() {
         return voterRepo.findAll();
     }

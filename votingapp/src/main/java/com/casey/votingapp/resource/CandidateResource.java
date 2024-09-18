@@ -1,13 +1,14 @@
 package com.casey.votingapp.resource;
 
 import com.casey.votingapp.domain.Candidate;
+import com.casey.votingapp.domain.Voter;
 import com.casey.votingapp.service.CandidateService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/candidates")
@@ -35,9 +36,16 @@ public class CandidateResource {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<Page<Candidate>> getCandidates(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                         @RequestParam(value = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok().body(candidateService.getAllCandidates(page, size));
+    @PutMapping("/{id}")
+    public ResponseEntity<Candidate> updateCandidate(@PathVariable String id, @RequestBody Candidate updatedCandidate) {
+        Candidate savedCandidate = candidateService.updateCandidate(id, updatedCandidate);
+        return ResponseEntity.ok(savedCandidate);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Candidate>> getCandidates() {
+        List<Candidate> allCandidates = candidateService.getAllCandidates();
+        return ResponseEntity.ok().body(allCandidates);
+    }
+
 }

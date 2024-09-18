@@ -35,6 +35,12 @@ public class VoterResource {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Voter> updateVoter(@PathVariable String id, @RequestBody Voter updatedVoter) {
+        Voter savedVoter = voterService.updateVoter(id, updatedVoter);
+        return ResponseEntity.ok(savedVoter);
+    }
+
     @GetMapping
     public ResponseEntity<List<Voter>> getVoters() {
         List<Voter> allVoters = voterService.getAllVoters();

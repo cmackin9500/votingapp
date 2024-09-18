@@ -5,10 +5,9 @@ import com.casey.votingapp.repo.CandidateRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -21,8 +20,15 @@ public class CandidateService {
         return candidateRepo.findById(id).orElseThrow(() -> new RuntimeException("Candidate not found"));
     }
 
-    public Page<Candidate> getAllCandidates(int page, int size) {
-        return candidateRepo.findAll(PageRequest.of(page, size, Sort.by("name")));
+    public Candidate updateCandidate(String id, Candidate updatedVoter) {
+        Candidate existingCandidate = getCandidate(id);
+        existingCandidate.setName(updatedVoter.getName());
+        existingCandidate.setNumberOfVotes(updatedVoter.getNumberOfVotes());
+        return candidateRepo.save(existingCandidate);
+    }
+
+    public List<Candidate> getAllCandidates() {
+        return candidateRepo.findAll();
     }
 
     public Candidate createCandidate(Candidate candidate) {

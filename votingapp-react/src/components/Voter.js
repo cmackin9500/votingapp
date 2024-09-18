@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { saveVoter } from "../api/ApiService";
 
-const Voter = () => {
+const VoterTable = () => {
   const [editingRowIndex, setEditingRowIndex] = useState(null);
   const [votersTableData, setVotersTableData] = useState([]);
 
@@ -97,4 +97,4 @@ const Voter = () => {
   );
 };
 
-export default Voter;
+export default VoterTable;

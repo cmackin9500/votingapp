@@ -6,13 +6,11 @@ import Candidate from "./components/Candidates";
 import VotingForm from "./components/VotingForm";
 
 function App() {
-  const [candidatesTableData, setCandidatesTableData] = useState([]);
-  const [currentTable, setCurrentTable] = useState("votersTable");
-  const [selectedVoter, setSelectedVoter] = useState("");
-  const [selectedCandidate, setSelectedCandidate] = useState("");
+  const [voterData, setVoterData] = useState([]);
+  const [candidateData, setCandidateData] = useState([]);
 
   return (
-    <div className="App">
+    <div className="container">
       <div className="top-half">
         <div className="table-container">
           <div className="table-wrapper">
