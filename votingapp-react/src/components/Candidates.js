@@ -8,7 +8,7 @@ const Candidate = () => {
   const addRow = () => {
     setCandidatesTableData([
       ...candidatesTableData,
-      { name: "", hasVoted: "No", isEditing: true }, // Ensure all fields are present
+      { name: "", numberOfVotes: 0, isEditing: true }, // Ensure all fields are present
     ]);
     setEditingRowIndex(candidatesTableData.length);
   };
@@ -25,7 +25,7 @@ const Candidate = () => {
       event.preventDefault();
       const candidateToSave = {
         name: candidatesTableData[index].name,
-        hasVoted: false,
+        numberOfVotes: 0,
       };
       const response = await saveCandidate(candidateToSave);
       saveRow(index);
@@ -68,7 +68,7 @@ const Candidate = () => {
           </tr>
           <tr>
             <th className="name-column">Name</th>
-            <th className="voted-column">Has Voted</th>
+            <th className="votes-column">Votes</th>
           </tr>
         </thead>
         <tbody>
@@ -88,7 +88,7 @@ const Candidate = () => {
                   row.name
                 )}
               </td>
-              <td className="voted-column">{row.hasVoted}</td>
+              <td className="votes-column">{row.numberOfVotes}</td>
             </tr>
           ))}
         </tbody>
