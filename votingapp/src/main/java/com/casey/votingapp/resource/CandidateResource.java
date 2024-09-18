@@ -36,8 +36,8 @@ public class CandidateResource {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Candidate>> getCandidate(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                   @RequestParam(value = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Page<Candidate>> getCandidates(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                         @RequestParam(value = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok().body(candidateService.getAllCandidates(page, size));
     }
 }

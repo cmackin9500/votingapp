@@ -15,6 +15,10 @@ export async function deleteVoter(id) {
   return await axios.delete(`${API_VOTERS_URL}/voter/${id}`);
 }
 
+export async function getVoters() {
+  return await axios.get(`${API_VOTERS_URL}`);
+}
+
 export async function saveCandidate(candidate) {
   return await axios.post(API_CANDIDATES_URL, candidate);
 }
@@ -25,4 +29,8 @@ export async function updateCandidate(candidate) {
 
 export async function deleteCandidate(id) {
   return await axios.delete(`${API_CANDIDATES_URL}/candidate/${id}`);
+}
+
+export async function getCandidate() {
+  return await axios.get(`${API_CANDIDATES_URL}`);
 }

@@ -3,11 +3,11 @@ package com.casey.votingapp.resource;
 import com.casey.votingapp.domain.Voter;
 import com.casey.votingapp.service.VoterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/voters")
@@ -36,8 +36,8 @@ public class VoterResource {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Voter>> getVoters(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                   @RequestParam(value = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok().body(voterService.getAllVoters(page, size));
+    public ResponseEntity<List<Voter>> getVoters() {
+        List<Voter> allVoters = voterService.getAllVoters();
+        return ResponseEntity.ok().body(allVoters);
     }
 }

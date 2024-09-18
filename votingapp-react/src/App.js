@@ -3,6 +3,7 @@ import "./App.css";
 import Voter from "./components/Voter";
 import { saveVoter } from "./api/ApiService";
 import Candidate from "./components/Candidates";
+import VotingForm from "./components/VotingForm";
 
 function App() {
   const [candidatesTableData, setCandidatesTableData] = useState([]);
@@ -23,6 +24,9 @@ function App() {
             </div>
           </div>
         </div>{" "}
+      </div>
+      <div className="bottom-half">
+        <VotingForm />
       </div>
     </div>
   );
