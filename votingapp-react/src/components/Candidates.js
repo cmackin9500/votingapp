@@ -1,64 +1,64 @@
 import React, { useState } from "react";
-import { saveVoter } from "../api/ApiService";
+import { saveCandidate } from "../api/ApiService";
 
-const Voter = () => {
+const Candidate = () => {
   const [editingRowIndex, setEditingRowIndex] = useState(null);
-  const [votersTableData, setVotersTableData] = useState([]);
+  const [candidatesTableData, setCandidatesTableData] = useState([]);
 
   const addRow = () => {
-    setVotersTableData([
-      ...votersTableData,
+    setCandidatesTableData([
+      ...candidatesTableData,
       { name: "", hasVoted: "No", isEditing: true }, // Ensure all fields are present
     ]);
-    setEditingRowIndex(votersTableData.length);
+    setEditingRowIndex(candidatesTableData.length);
   };
 
   const handleInputChange = (event, index) => {
     const { name, value } = event.target;
-    const updatedVoters = [...votersTableData];
-    updatedVoters[index][name] = value;
-    setVotersTableData(updatedVoters);
+    const updatedCandidates = [...candidatesTableData];
+    updatedCandidates[index][name] = value;
+    setCandidatesTableData(updatedCandidates);
   };
 
   const handleKeydown = async (event, index) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      const voterToSave = {
-        name: votersTableData[index].name,
+      const candidateToSave = {
+        name: candidatesTableData[index].name,
         hasVoted: false,
       };
-      const response = await saveVoter(voterToSave);
+      const response = await saveCandidate(candidateToSave);
       saveRow(index);
     }
   };
 
   const saveRow = (index) => {
-    if (!votersTableData[index].name.trim()) {
-      const newData = votersTableData.filter((_, i) => i !== index);
-      setVotersTableData(newData);
+    if (!candidatesTableData[index].name.trim()) {
+      const newData = candidatesTableData.filter((_, i) => i !== index);
+      setCandidatesTableData(newData);
       setEditingRowIndex(null);
     } else {
-      const updatedData = [...votersTableData];
+      const updatedData = [...candidatesTableData];
       updatedData[index].isEditing = false;
-      setVotersTableData(updatedData);
+      setCandidatesTableData(updatedData);
     }
   };
 
   return (
     <div>
-      <h2>Voters</h2>
+      <h2>Candidates</h2>
       <table>
         <thead>
           <tr>
             <th colSpan="2" className="title-row">
-              Voters
+              Candidates
               <span
                 className="plus-sign"
                 tabIndex="0"
                 role="button"
-                aria-label="Add new row to Voters table"
+                aria-label="Add new row to Candidates table"
                 onClick={() => {
-                  addRow("votersTable");
+                  addRow("candidatesTable");
                 }}
                 onKeyDown={(event) => handleKeydown(event, editingRowIndex)}
               >
@@ -72,7 +72,7 @@ const Voter = () => {
           </tr>
         </thead>
         <tbody>
-          {votersTableData.map((row, index) => (
+          {candidatesTableData.map((row, index) => (
             <tr className={`row-${index}`} key={index}>
               <td className="name-column">
                 {row.isEditing ? (
@@ -97,4 +97,4 @@ const Voter = () => {
   );
 };
 
-export default Voter;
+export default Candidate;
