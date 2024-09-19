@@ -14,7 +14,7 @@ h1 {
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   justify-content: space-between;
 }
 
@@ -35,7 +35,7 @@ h1 {
 .table-container {
   width: calc(100% - var(--padding-constant) * 2);
   margin: 0 auto;
-  padding: 0 var(--padding-constant); /* Equal padding on left and right */
+  padding: 0 var(--padding-constant);
   box-sizing: border-box;
 }
 
@@ -47,7 +47,7 @@ h1 {
 
 .table1,
 .table2 {
-  width: 48%; /* Adjust width to fit two tables side by side with some spacing */
+  width: 48%;
 }
 
 table {
@@ -130,4 +130,46 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.voting-form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the form horizontally */
+}
+
+.voting-form {
+  display: flex; /* Flexbox to align items in a row */
+  align-items: center; /* Align vertically */
+  gap: 10px; /* Add space between elements */
+  width: 100%;
+  max-width: 800px; /* Limit max width */
+}
+
+.voter-select,
+.candidate-select {
+  flex: 1; /* Make the select elements flexible to take available space */
+  padding: 10px;
+  font-size: 16px;
+}
+
+.voting-form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the form horizontally */
+}
+
+.voting-form {
+  display: flex; /* Flexbox to align items in a row */
+  align-items: center; /* Align vertically */
+  gap: 10px; /* Add space between elements */
+  width: 100%;
+  max-width: 800px; /* Limit max width */
+}
+
+.voter-select,
+.candidate-select {
+  flex: 1; /* Make the select elements flexible to take available space */
+  padding: 10px;
+  font-size: 16px;
 }

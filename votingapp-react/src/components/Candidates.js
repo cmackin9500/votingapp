@@ -1,49 +1,16 @@
-import React, { useState } from "react";
-import { saveCandidate } from "../api/ApiService";
+import React, { useState, useEffect } from "react";
 
-const Candidate = () => {
-  const [editingRowIndex, setEditingRowIndex] = useState(null);
-  const [candidatesTableData, setCandidatesTableData] = useState([]);
-
-  const addRow = () => {
-    setCandidatesTableData([
-      ...candidatesTableData,
-      { name: "", numberOfVotes: 0, isEditing: true }, // Ensure all fields are present
-    ]);
-    setEditingRowIndex(candidatesTableData.length);
-  };
-
-  const handleInputChange = (event, index) => {
-    const { name, value } = event.target;
-    const updatedCandidates = [...candidatesTableData];
-    updatedCandidates[index][name] = value;
-    setCandidatesTableData(updatedCandidates);
-  };
-
-  const handleKeydown = async (event, index) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      const candidateToSave = {
-        name: candidatesTableData[index].name,
-        numberOfVotes: 0,
-      };
-      const response = await saveCandidate(candidateToSave);
-      saveRow(index);
-    }
-  };
-
-  const saveRow = (index) => {
-    if (!candidatesTableData[index].name.trim()) {
-      const newData = candidatesTableData.filter((_, i) => i !== index);
-      setCandidatesTableData(newData);
-      setEditingRowIndex(null);
-    } else {
-      const updatedData = [...candidatesTableData];
-      updatedData[index].isEditing = false;
-      setCandidatesTableData(updatedData);
-    }
-  };
-
+const Candidate = ({
+  candidatesTableData,
+  setCandidatesTableData,
+  addCandidateRow,
+  handleCandidateInputChange,
+  handleCandidateKeydown,
+  editingCandidateRowIndex,
+}) => {
+  useEffect(() => {
+    setCandidatesTableData(candidatesTableData);
+  }, [candidatesTableData, setCandidatesTableData]);
   return (
     <div>
       <h2>Candidates</h2>
@@ -58,9 +25,11 @@ const Candidate = () => {
                 role="button"
                 aria-label="Add new row to Candidates table"
                 onClick={() => {
-                  addRow("candidatesTable");
+                  addCandidateRow();
                 }}
-                onKeyDown={(event) => handleKeydown(event, editingRowIndex)}
+                onKeyDown={(event) =>
+                  handleCandidateKeydown(event, editingCandidateRowIndex)
+                }
               >
                 +
               </span>
@@ -81,8 +50,10 @@ const Candidate = () => {
                     name="name"
                     placeholder="Enter name..."
                     value={row.name}
-                    onChange={(event) => handleInputChange(event, index)}
-                    onKeyDown={(event) => handleKeydown(event, index)}
+                    onChange={(event) =>
+                      handleCandidateInputChange(event, index)
+                    }
+                    onKeyDown={(event) => handleCandidateKeydown(event, index)}
                   />
                 ) : (
                   row.name
